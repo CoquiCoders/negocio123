@@ -9,4 +9,5 @@ def home(request):
 
 def agency(request, agency_name):
   list_of_agencies = Agency.objects.all()
-  return render(request, 'agency.html', { 'agencies': list_of_agencies })
+  agency = Agency.objects.filter(slug=agency_name)[0]
+  return render(request, 'agency.html', { 'agency': agency, 'agencies': list_of_agencies })
