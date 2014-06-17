@@ -32,10 +32,10 @@
         <div class="w-nav nav-container" data-collapse="medium" data-animation="default" data-duration="400" data-contain="1">
           <div class="w-container nav-container">
             <nav class="w-nav-menu w-clearfix navigation-column" role="navigation">
-              <div class="w-nav" data-collapse="medium" data-animation="default" data-duration="400"></div><a class="w-nav-link nav-link" href="department-of-state.html"><strong>Dept Estado</strong></a><a class="w-nav-link nav-link" href="irs.html"><strong>IRS</strong></a><a class="w-nav-link hacienda nav-link" href="hacienda.html"><strong>Hacienda</strong></a>
-              <a
-              class="w-nav-link nav-link" href="municipios.html"><strong>Municipios</strong>
-                </a><a class="w-nav-link nav-link" href="seguro-social-patronal.html"><strong>Corporación<br></strong></a><a class="w-nav-link nav-link" href="cuenta-bancaria.html"><strong>Dept Trabajo</strong></a><a class="w-nav-link nav-link" href="departamento-de-trabajo.html"><strong>Banco</strong></a>
+              <div class="w-nav" data-collapse="medium" data-animation="default" data-duration="400"></div>
+              {% for step in steps %}
+                <a class="w-nav-link nav-link" href="/{{ step.id }}"><strong>{{ step.short_title }}</strong></a>  
+              {% endfor %}
             </nav>
             <div class="w-nav-button">
               <div class="w-icon-nav-menu"></div>
