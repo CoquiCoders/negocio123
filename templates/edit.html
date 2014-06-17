@@ -1,0 +1,14 @@
+{% extends "admin/model/edit.html" %}
+
+{% block head %}
+  <script type="text/javascript" src="{{ url_for('static', filename='js/vendor/tinymce/tinymce.min.js') }}"></script>
+{% endblock head %}
+
+{% block tail %}
+  {{ super() }}
+    <script type="text/javascript">
+    tinymce.init({
+      selector: "textarea"
+   });
+  </script>
+{% endblock tail %}

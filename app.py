@@ -4,6 +4,8 @@ from flask.ext.sqlalchemy import SQLAlchemy
 
 from flask.ext.admin import Admin
 from flask.ext.admin.contrib.sqla import ModelView
+from wtforms.fields import TextAreaField
+
 
 app = Flask(__name__)
 app.debug = True
@@ -19,13 +21,21 @@ class Step(db.Model):
   description = db.Column(db.String(140))
   time_period = db.Column(db.String(140))
   online = db.Column(db.Boolean)
-  step_cost = db.Column(db.String(140))
+  step_cost = db.Column(db.String)
+  type_of_process = db.Column(db.String)
+  papers_to_fill = db.Column(db.String)
+  attention = db.Column(db.String)
+  step_url = db.Column(db.String(80))
 
   def __repr__(self):
     return '<Step %r>' % self.title
 
+class MyView(ModelView):
+  form_overrides = dict(type_of_process=TextAreaField, papers_to_fill=TextAreaField, attention=TextAreaField,)
+  edit_template = 'edit.html'
+
 admin = Admin(app, name='Negocio123')
-admin.add_view(ModelView(Step, db.session))
+admin.add_view(MyView(Step, db.session))
 
 @app.route('/')
 def index():
