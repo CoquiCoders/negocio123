@@ -18,14 +18,14 @@ class Step(db.Model):
   def __repr__(self):
     return '<Step %r>' % self.title
 
-steps = Step.query.all()
-
 @app.route('/')
 def index():
+  steps = Step.query.all()
   return render_template('index.html', steps=steps)
 
 @app.route('/<step_number>/')
 def step(step_number=None):
+  steps = Step.query.all()
   if not step_number:
     return redirect(url_for('index'))
   current_step = Step.query.get(step_number)
