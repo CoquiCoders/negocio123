@@ -1,4 +1,4 @@
-from flask import Flask, request, render_template
+from flask import Flask, render_template, redirect, url_for
 from flask.ext.sqlalchemy import SQLAlchemy
 
 app = Flask(__name__)
@@ -18,10 +18,19 @@ class Step(db.Model):
   def __repr__(self):
     return '<Step %r>' % self.title
 
+steps = Step.query.all()
+
 @app.route('/')
 def index():
-  steps = Step.query.all()
   return render_template('index.html', steps=steps)
+
+@app.route('/<step_number>/')
+def step(step_number=None):
+  if not step_number:
+    return redirect(url_for('index'))
+  current_step = Step.query.get(step_number)
+  return render_template('step.html', steps=steps, current_step=current_step)
+
 
 
 if __name__ == '__main__':

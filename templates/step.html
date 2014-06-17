@@ -1,0 +1,215 @@
+{% extends "layout.html" %}
+
+{% block content %}
+      <div class="w-row">
+        <div class="w-col w-col-7">
+          <h1>{{ current_step.full_title }} &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</h1>
+          <p class="header-p">{{ current_step.description }}</p>
+        </div>
+        <div class="w-col w-col-5">
+          <p class='progress-wheel'>Progress wheel</p>
+        </div>
+      </div>
+      <div class="section">
+        <div class="w-row">
+          <div class="w-col w-col-4 managing-expectations">
+            <img src="{{ url_for('static', filename='images/clock.png') }}" alt="clock">
+            <div><span style="font-size: 25px;"><strong>¿Cuánto demora?</strong></span>
+            </div>
+            <div>{{ current_step.time_period }}&nbsp;</div>
+          </div>
+          <div class="w-col w-col-4 managing-expectations">
+            {% if current_step.online %}
+            <img src="{{ url_for('static', filename='images/online.png') }}" alt="online.png">
+            <div><strong class="managing-p">¿Es online u offline?</strong>
+            </div>
+              <div class="online-offline">Es un trámite online.&nbsp;&nbsp;&nbsp;<strong>100</strong>%</div>
+              <a href="#"></a>
+            {% else %}
+            <img src="{{ url_for('static', filename='images/offline.png') }}" alt="offline.png">
+            <div><strong class="managing-p">¿Es online u offline?</strong>
+            </div>
+              <div class="online-offline">Es un trámite offline.&nbsp;&nbsp;&nbsp;</div>
+              <a href="#"></a>        
+            {% endif %}
+          </div>
+          <div class="w-col w-col-4 managing-expectations">
+            <img src="{{ url_for('static', filename='images/money.png') }}" alt="money.png">
+            <div class="managing-p"><strong class="managing-p">¿Cuánto cuesta?</strong>
+            </div>
+            <div>
+              {{ current_step.step_cost }}
+            </div>
+          </div>
+        </div>
+        <div>
+          <h2>¿Qué tipo de trámites se realizan en este Departamento?</h2>
+          <p><strong>Chequear la disponibilidad del nombre que deseas usar para tu negocio.</strong>
+          </p>
+          <p>Aquí debes seleccionar la <span>clase</span> de operación corporativa: corporación, corporación profesional, corporación intima, corporación especial propiedad de trabajadores, corporación especial para el desarrollo del municipio, corporación
+            auspiciada por municipios, LLC</p>
+          <p>Definir el tipo de corporación:&nbsp;con fines de lucro y sin fines de lucro.</p>
+          <p>Seleccionar Jurisdicciones: domésticas o foráneas.</p>
+          <p><strong>Definir la naturaleza de las operaciones o servicios:&nbsp;</strong>
+          </p>
+          <ul class="body-list">
+            <li>servicios sociales, legales, de salud o educativos</li>
+            <li>arte y cultura</li>
+            <li>deportes</li>
+            <li>ambientales</li>
+            <li>desarrollo social, economico y comunitario</li>
+            <li>donativo</li>
+            <li>actividades internacionales</li>
+            <li>servicios religiosos</li>
+            <li>servicios intitucionales</li>
+          </ul>
+        </div>
+        <p><strong>Definir la forma de organización:</strong>
+        </p>
+        <ul class="body-list">
+          <li>Organización profesional</li>
+          <li>club social</li>
+          <li>organizacion civica</li>
+          <li>organizacion religiosa</li>
+          <li>fundacion</li>
+          <li>organizacion de base comunitaria</li>
+          <li>organizacion filantropica</li>
+          <li>servicios institucionales</li>
+        </ul>
+        <p>Seleccionar a la persona que será responsable del registro</p>
+        <p>Definir el propósito de la corporación</p>
+        <p>Definir la fecha&nbsp;de radicación: día en que se registra la empresa</p>
+        <p>Definir el tipo de acciones de la corporación que otorgarán derechos económicos a sus titulares:</p>
+        <ul class="body-list">
+          <li>Valor a la par:&nbsp;representa el valor mínimo por acción que se va a invertir cuando se emitan las acciones inicialmente</li>
+          <li>&nbsp;Sin valor a la par – su precio se establece al momento de su venta</li>
+          <li>Preferidas – tienen una mayor demanda de los activos y las ganancias de una empresa. Esto es cierto, cuando la empresa tiene exceso de efectivo y decide distribuir dinero en forma de dividendos a sus inversionistas. En estos casos cuando se
+            realizan las distribuciones, accionistas preferidos deben pagarse antes que los accionistas comunes.</li>
+          <li>&nbsp;Comunes – la emisión de acciones comunes es un instrumento para conseguir capital social a largo plazo, representando las formas de propiedad y en consecuencia no es obligatorio el pago de dividendos por su adquisición. El accionista común
+            también se conoce con el término de "Dueño residual", ya que en esencia es él quien recibe lo que queda después de que todas las reclamaciones sobre las utilidades y activos de la empresa se han satisfecho.</li>
+        </ul>
+        <p>Tambien debes seleccionar el código&nbsp;de clasificación de la industria norteamericana (NAICS) que mejor defina el tipo de negocio. Será necesario para continuar el trámite en Hacienda.</p>
+        <ul class="body-list">
+          <li><a href="#">http://www.census.gov/cgi-bin/sssd/naics/naicsrch?chart=2012</a>
+          </li>
+        </ul>
+        <div>
+          <h2>Planillas que se deben llenar</h2>
+          <p>Se debe radicar el informe anual antes del 15 de abril de cada año.
+            <br>Cuesta 100 usd por cada reporte anual.</p>
+          <ul class="body-list">
+            <li><a href="#">http://www2.pr.gov/agencias/estado/Documents/Formularios/Corporaciones/CORPINF02.</a><a href="#">pdf<br></a>
+            </li>
+            <li><a href="#">https://prcorpfiling.f1hst.com/AnnualReportStart.</a><a href="#">aspx</a>
+              <a href="#">
+                <br>
+              </a>
+            </li>
+          </ul>
+          <h2>Prestar atención!</h2>
+          <p>Cuando te pidan colocar a que se dedica tu compañía tal vez te convenga ser mas abstracto en tu descripción así si en el futuro quieres agregar alguna actividad o modificar alguna existente no te sientes afectado por dicha descripción.</p>
+          <p>El proceso de cerrar una corporación tiene costo y tiene varios requerimientos, en especial tener todos los&nbsp;informes anuales al día. Se debe presentar una resolución corporativa para procesar la disolución de la entidad.
+            <br>Costo:
+            <br>LLC = $ 80
+            <br>Corporaciones con fines de lucro = $ 20
+            <br>Corporaciones sin fines de lucro = $ 4</p>
+          <p>Si tienes una corporación regular o corporación íntima que&nbsp;no emitió acciones o nunca operó el proceso para el cierre es el siguiente:</p>
+          <ol class="ol-body">
+            <li>La Junta de Directores se reunirá y una mayoría debe acordar disolver la corporación. Se debe redactar una minuta que contenga lo acontecido.</li>
+            <li>Debes acudir a un Notario y llevarle la minuta para que le redacte una resolución corporativa.</li>
+            <li>Presenta dicho documento en el Depto. de Estado: “Certificado de Disolución Previa a la Emisión de Acciones o Comienzo de Gestión Corporativa”.</li>
+            <li>Lleva al Departamento de Hacienda el Formulario SC2914, entrega el Registro de Comerciante y la documentación del IVU loto.</li>
+            <li>Radicar en el Depto. de Hacienda la Planilla de Contribución Sobre Ingresos Corporativos.</li>
+            <li>Radicar en el Depto. de Hacienda una Declaración Jurada sobre la disolución y acompañala con la resolución corporativa.</li>
+            <li>Luego acude al Municipio correspondiente y da de baja la Patente Municipal y el IVU Municipal.</li>
+            <li>Por último, debes enviar una carta al Internal Revenue Service (IRS) solicitando que se dé de baja su Número de Identificación de empleador&nbsp;&nbsp;(EIN).</li>
+          </ol>
+          <p>Si es una corporación regular o corporación íntima que&nbsp;emitió acciones y operó&nbsp;el proceso es el siguiente:</p>
+          <ol class="ol-body">
+            <li>La Junta de Directores se debe reunir y aprobar una resolución corporativa estableciendo que la disolución es conveniente para la corporación.</li>
+            <li>La Junta de Directores enviará, por correo, a cada accionista con derecho al voto la notificación de la resolución y la convocatoria para una reunión de accionistas para tomar acción sobre la resolución.</li>
+            <li>En la reunión de accionistas, las acciones en circulación con derecho al voto deberán autorizar, por mayoría, la disolución de la corporación.</li>
+            <li>Presentar en el Depto. de Estado un documento titulado: “Certificado de Disolución de Corporacion Autorizada a Emitir Acciones de Capital”.</li>
+            <li>Notificar, por correo, la disolución a cada acreedor.</li>
+            <li>Radicar en el Depto. de Hacienda el Formulario SC2914, entregar el Registro de Comerciante y la documentación del IVU loto con la terminal de fiscalización.</li>
+            <li>Radicar en el Depto. de Hacienda la planilla de Contribución Sobre Ingresos Corporativos.</li>
+            <li>Radicar en el Depto. de Hacienda una Declaración Jurada sobre disolución y acompañar la Resolución Corporativa.</li>
+            <li>Luego acude al Municipio correspondiente y da de baja la Patente Municipal y el IVU Municipal.</li>
+            <li>Radicar ante el Internal Revenue Service (IRS) los formularios 941 y 944.
+              <br>http://www.irs.gov/pub/irs-pdf/f944.pdf
+              <br>http://www.irs.gov/pub/irs-pdf/f941.pdf</li>
+            <li>Por último, debes enviar una carta al Internal Revenue Service (IRS) solicitando que se dé de baja tu Número de identificación de Empleador (EIN).</li>
+          </ol>
+          <div>
+            <p>Todas las corporaciones, excepto las religiosas, tiene que radicar un informe anual en el Departamento de Estado en o antes del 15 de abril de cada año.</p>
+          </div>
+          <p>Corporaciones con fines de lucro que tuvieran un volumen de negocio mayor o igual a tres millones ($3, 000,000) de dólares tienen que subir su estado financiero auditado.
+            <br>Corporaciones que estuvieron inactivas o no operaran durante el año reportado no están exentas a la radicación y tienen que proveer un estado financiero.</p>
+          <p>Todas las entidades tendrán que proveer datos económicos durante la radicación del informe anual. Esta información será variada dependiendo del tipo de entidad y se presenta de la siguiente manera:</p>
+          <p>Corporaciones con Fines de Lucro:</p>
+          <ul>
+            <li>Número de Identificación Patronal (EIN)</li>
+            <li>Volumen de Negocio</li>
+            <li>Número de Empleados</li>
+            <li>Código NAICS</li>
+            <li>Título NAICS</li>
+            <li>Exportación</li>
+            <li>Destino Principal de Exportación</li>
+            <li>Destino Secundario de Exportación</li>
+            <li>Número Total de Horas de Servicio</li>
+          </ul>
+        </div>
+        <p>Corporaciones Sin Fines de Lucro:</p>
+        <ul>
+          <li>Número de Identificación de Patronal (EIN)</li>
+          <li>Volumen de Negocio</li>
+          <li>Número de Empleados</li>
+          <li>Número Total de Voluntarios</li>
+        </ul>
+        <div class="w-form">
+          <form name="email-form" data-name="Email Form" data-redirect="https://prcorpfiling.f1hst.com/">
+            <h2>Comentarios sobre el Departamento de Estado</h2>
+            <ul>
+              <li class="comments">Sugerencias: ¿qué trámite realizaste? &nbsp;&nbsp;¿cómo calificaría el proceso?&nbsp;&nbsp;¿que mejorarias?&nbsp;&nbsp;¿que partes &nbsp;te&nbsp;resultaron complicadas?&nbsp;&nbsp;¿por qué?</li>
+            </ul>
+            <div>
+              <textarea class="w-input" placeholder="Todos tus comentarios son bienvenidos"></textarea>
+            </div>
+            <h2>Si quieres recibir información sobre incentivos y beneficios específicos para tu empresa por favor completa los siguientes campos.</h2>
+            <label for="name">Nombre</label>
+            <input class="w-input" type="text" placeholder="Completa tu nombre" name="nombre" data-name="Nombre">
+            <label for="email">Correo electónico</label>
+            <input class="w-input" type="email" placeholder="Completa tu correo electrónico" name="email" data-name="Email" required="required">
+            <label for="email">Tipo de corporacion&nbsp;</label>
+            <input class="w-input" type="email" placeholder="Completa el tipo (LLC - Corporación - Sin fines de lucro) " name="coporaci-n" data-name="Coporación" required="required">
+            <label for="email">Tipo de neogcio – industria</label>
+            <input class="w-input" type="email" placeholder="Completa el tipo de negocio (restaurante - tienda de ropa - estudio de arquitectura...) " name="industria" data-name="Industria" required="required">
+            <label for="email">Ubicación del negocio</label>
+            <input class="w-input" type="email" placeholder="Completa la ciudad o zona" name="ubicaci-n" data-name="Ubicación" required="required">
+            <input class="w-button submit" type="submit" value="Entrar" data-wait="Please wait...">
+            <div class="w-row">
+              <div class="w-col w-col-6 column-center">
+                <h2>Llamar al Departamento de Estado</h2>
+                <img src="images/080864-glossy-black-icon-business-phone-solid.png" width="100" alt="53383cf6ec4fad1e470005c6_080864-glossy-black-icon-business-phone-solid.png">
+              </div>
+              <div class="w-col w-col-6 column-center">
+                <h2>Empezar aplicación:</h2>
+                <input class="w-button statedep" type="submit" value="Ir al sitio del  Departamento del Estado" data-wait="Please wait...">
+              </div>
+            </div>
+          </form>
+          <div class="w-form-done">
+            <p>Thank you! Your submission has been received!</p>
+          </div>
+          <div class="w-form-fail">
+            <p>Oops! Something went wrong while submitting the form :(</p>
+          </div>
+        </div>
+      </div>
+      <div class="w-row">
+        <div class="w-col w-col-6 w-col-small-6 w-col-tiny-6 column-center"><a class="button btn-small" href="index.html">Home</a>
+        </div>
+        <div class="w-col w-col-6 w-col-small-6 w-col-tiny-6 column-center"><a class="button btn-small" href="irs.html">Siguiente</a>
+        </div>
+      </div>
+{% endblock content %}
