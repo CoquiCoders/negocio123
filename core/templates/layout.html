@@ -36,7 +36,7 @@
             <nav class="w-nav-menu w-clearfix navigation-column" role="navigation">
               <div class="w-nav" data-collapse="medium" data-animation="default" data-duration="400"></div>
               {% for agency in agencies %}
-                <a class="w-nav-link nav-link" href="department-of-state.html"><strong>{{ agency.short_name }}</strong></a> 
+                <a class="w-nav-link nav-link" href="{% url 'agency' agency.slug %}"><strong>{{ agency.short_name }}</strong></a> 
               {% endfor %}
             </nav>
             <div class="w-nav-button">
