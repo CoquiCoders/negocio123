@@ -1,5 +1,3 @@
-{% load staticfiles %}
-
 <!DOCTYPE html>
 <!-- This site was created in Webflow. http://www.webflow.com-->
 <!-- Last Published: Mon Jun 16 2014 22:00:48 GMT+0000 (UTC) -->
@@ -9,9 +7,9 @@
   <title>Starting a Business in Puerto Rico</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="generator" content="Webflow">
-  <link rel="stylesheet" type="text/css" href="{% static 'css/vendor/normalize.css' %}">
-  <link rel="stylesheet" type="text/css" href="{% static 'css/main.css' %}">
-  <link rel="stylesheet" type="text/css" href="{% static 'css/vendor/webflow.css' %}">
+  <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/vendor/normalize.css') }}">
+  <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/vendor/webflow.css') }}">
+  <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/main.css') }}">
   <script src="https://ajax.googleapis.com/ajax/libs/webfont/1.4.7/webfont.js"></script>
   <script>
     WebFont.load({
@@ -20,7 +18,7 @@
       }
     });
   </script>
-  <script type="text/javascript" src="{% static 'js/vendor/modernizr.js' %}"></script>
+  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/modernizr/2.8.2/modernizr.min.js"></script>
   <link rel="shortcut icon" type="image/x-icon" href="https://y7v4p6k4.ssl.hwcdn.net/placeholder/favicon.ico">
   <link rel="apple-touch-icon" href="images/thumbnail-starter.png">
 </head>
@@ -28,16 +26,16 @@
   <div class="nav-section">
     <div class="nav-section">
       <div class="w-container">
-        <a class="w-inline-block company-link" href="/">
+        <a class="w-inline-block company-link" href="index.html">
           <div class="company">Negocio 123</div>
         </a>
         <div class="w-nav nav-container" data-collapse="medium" data-animation="default" data-duration="400" data-contain="1">
           <div class="w-container nav-container">
             <nav class="w-nav-menu w-clearfix navigation-column" role="navigation">
-              <div class="w-nav" data-collapse="medium" data-animation="default" data-duration="400"></div>
-              {% for agency in agencies %}
-                <a class="w-nav-link nav-link" href="{% url 'agency' agency.slug %}"><strong>{{ agency.short_name }}</strong></a> 
-              {% endfor %}
+              <div class="w-nav" data-collapse="medium" data-animation="default" data-duration="400"></div><a class="w-nav-link nav-link" href="department-of-state.html"><strong>Dept Estado</strong></a><a class="w-nav-link nav-link" href="irs.html"><strong>IRS</strong></a><a class="w-nav-link hacienda nav-link" href="hacienda.html"><strong>Hacienda</strong></a>
+              <a
+              class="w-nav-link nav-link" href="municipios.html"><strong>Municipios</strong>
+                </a><a class="w-nav-link nav-link" href="seguro-social-patronal.html"><strong>Corporación<br></strong></a><a class="w-nav-link nav-link" href="cuenta-bancaria.html"><strong>Dept Trabajo</strong></a><a class="w-nav-link nav-link" href="departamento-de-trabajo.html"><strong>Banco</strong></a>
             </nav>
             <div class="w-nav-button">
               <div class="w-icon-nav-menu"></div>
@@ -47,8 +45,10 @@
       </div>
     </div>
   </div>
+  <div class="w-container">
   {% block content %}
   {% endblock content %}
+  </div>
   <div class="section footer">
     <div class="w-container">
       <div class="w-row">
@@ -60,7 +60,6 @@
     </div>
   </div>
   <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
-  <script type="text/javascript" src="{% static 'js/vendor/webflow.js' %}"></script>
   <!--[if lte IE 9]><script src="https://cdnjs.cloudflare.com/ajax/libs/placeholders/3.0.2/placeholders.min.js"></script><![endif]-->
 </body>
 </html>
