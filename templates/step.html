@@ -43,18 +43,21 @@
           </div>
         </div>
         <div>
-          <h2>¿Qué tipo de trámites se realizan en este Departamento?</h2>
-
+          {% if current_step.type_of_process %}
+            <h2>¿Qué tipo de trámites se realizan en este Departamento?</h2>
             {{ current_step.type_of_process|safe }}
+          {% endif %}
           
-          <h2>Planillas que se deben llenar</h2>
-
+          {% if current_step.papers_to_fill %}
+            <h2>Planillas que se deben llenar</h2>
             {{ current_step.papers_to_fill|safe }}
+          {% endif %}
 
-          <h2>Prestar atención!</h2>
-
+          {% if current_step.attention %}
+            <h2>Prestar Atencion!</h2>
             {{ current_step.attention|safe }}
-
+          {% endif %}
+          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
       </div>
       <div class="w-row">
         <div class="w-col w-col-6 w-col-small-6 w-col-tiny-6 column-center"><a class="button btn-small" href="index.html">Home</a>

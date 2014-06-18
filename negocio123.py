@@ -11,7 +11,7 @@ app = Flask(__name__)
 app.debug = True
 app.secret_key = 'A0Zr98j/3yX R~XHH!jmN]LWXD2D256y2'
 
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:////tmp/test.db'
+app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///dump.db'
 db = SQLAlchemy(app)
 
 
