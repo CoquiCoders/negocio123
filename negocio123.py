@@ -1,4 +1,4 @@
-from flask import Flask, render_template, redirect, url_for
+from flask import Flask, render_template, redirect, url_for, abort
 
 from flask.ext.sqlalchemy import SQLAlchemy
 
@@ -48,8 +48,13 @@ def step(step_number=None):
   if not step_number:
     return redirect(url_for('index'))
   current_step = Step.query.get(step_number)
+  if not current_step:
+    abort(404)
   return render_template('step.html', steps=steps, current_step=current_step)
 
+@app.errorhandler(404)
+def page_not_found(error):
+  return render_template('page_not_found.html'), 404
 
 if __name__ == '__main__':
   app.run()

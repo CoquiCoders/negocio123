@@ -6,7 +6,7 @@ from negocio123 import app, db, Step
 class NoStepsTestCase(unittest.TestCase):
 
   def setUp(self):
-    app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:////tmp/testdb.db'
+    app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:////tmp/empty.db'
     db.create_all()
     self.app = app.test_client()
 
@@ -17,10 +17,14 @@ class NoStepsTestCase(unittest.TestCase):
     rv = self.app.get('/')
     assert 'w-nav-link' not in rv.data
 
+  def test_step_view_returns_404(self):
+    rv = self.app.get('/1/')
+    self.assertEquals(404, rv.status_code)
+
 class StepsTestCase(unittest.TestCase):
 
   def setUp(self):
-    app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:////tmp/testdb.db'
+    app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:////tmp/full.db'
     db.create_all()
 
     steps = []
@@ -43,6 +47,14 @@ class StepsTestCase(unittest.TestCase):
   def test_navbar_is_not_empty(self):
     rv = self.app.get('/')
     assert 'w-nav-link' in rv.data
+
+  def test_step_view_returns_200(self):
+    rv = self.app.get('/1/')
+    self.assertEquals(200, rv.status_code)
+
+  def test_step_view_upper_limit_return_404(self):
+    rv = self.app.get('/8/')
+    self.assertEquals(404, rv.status_code)
 
 if __name__ == '__main__':
   unittest.main()
