@@ -9,4 +9,5 @@ To-Do
 - [ ] Implement authentication for admin (Flask-login)
 - [ ] Implement Progress Wheel
 - [ ] Add next and prev buttons to each step
+- [ ] Implement Flask-Babel in an optional way
 - [ ] Write MOAR unit tests
