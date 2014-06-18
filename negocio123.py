@@ -28,7 +28,7 @@ class Step(db.Model):
   step_url = db.Column(db.String(80))
 
   def __repr__(self):
-    return '<Step %r>' % self.title
+    return '<Step: %r>' % self.title
 
 class MyView(ModelView):
   form_overrides = dict(type_of_process=TextAreaField, papers_to_fill=TextAreaField, attention=TextAreaField,)
