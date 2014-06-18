@@ -33,6 +33,9 @@
   <th class="column-header">
     <span class='edit_header'> Step Cost </span>
   </th>
+  <th class="column-header">
+    <span class='edit_header'> URL </span>
+  </th>
   
 {% endblock %}
 
@@ -69,4 +72,5 @@
   <td>{{ get_value(row, 'time_period') }}</td>
   <td>{{ get_value(row, 'online') }}</td>
   <td>{{ get_value(row, 'step_cost') }}</td>
+  <td> <a href="{{ get_value(row, 'step_url') }}" target='_blank'> {{ get_value(row, 'step_url') }} </a> </td>
 {% endblock list_row %}
