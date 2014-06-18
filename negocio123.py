@@ -1,19 +1,36 @@
 from flask import Flask, render_template, redirect, url_for, abort
 
 from flask.ext.sqlalchemy import SQLAlchemy
-
-from flask.ext.admin import Admin
 from flask.ext.admin.contrib.sqla import ModelView
+from flask.ext.admin import Admin
+from flask.ext.login import LoginManager, login_user, UserMixin, login_required, current_user
 from wtforms.fields import TextAreaField
 
 
 app = Flask(__name__)
 app.debug = True
-
+app.secret_key = 'A0Zr98j/3yX R~XHH!jmN]LWXD2D256y2'
 
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:////tmp/test.db'
 db = SQLAlchemy(app)
 
+# 
+# Flask-login
+# 
+login_manager = LoginManager()
+login_manager.init_app(app)
+
+@login_manager.user_loader
+def load_user(userid):
+    return User.get(userid)
+
+class User(UserMixin):
+  pass
+
+
+# 
+# Database
+# 
 class Step(db.Model):
   id = db.Column(db.Integer, primary_key=True)
   full_title = db.Column(db.String(80), unique=True)
@@ -30,9 +47,15 @@ class Step(db.Model):
   def __repr__(self):
     return '<Step: %r>' % self.title
 
-class MyView(ModelView):
+# 
+# Flask-admin
+# 
+class MyView(ModelView):  
   form_overrides = dict(type_of_process=TextAreaField, papers_to_fill=TextAreaField, attention=TextAreaField,)
   edit_template = 'edit.html'
+
+  def is_accessible(self):
+    return current_user.is_authenticated()
 
 admin = Admin(app, name='Negocio123')
 admin.add_view(MyView(Step, db.session))
