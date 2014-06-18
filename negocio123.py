@@ -14,19 +14,6 @@ app.secret_key = 'A0Zr98j/3yX R~XHH!jmN]LWXD2D256y2'
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:////tmp/test.db'
 db = SQLAlchemy(app)
 
-# 
-# Flask-login
-# 
-login_manager = LoginManager()
-login_manager.init_app(app)
-
-@login_manager.user_loader
-def load_user(userid):
-    return User.get(userid)
-
-class User(UserMixin):
-  pass
-
 
 # 
 # Database
@@ -52,10 +39,10 @@ class Step(db.Model):
 # 
 class MyView(ModelView):  
   form_overrides = dict(type_of_process=TextAreaField, papers_to_fill=TextAreaField, attention=TextAreaField,)
-  edit_template = 'edit.html'
+  edit_template = 'admin/edit.html'
+  list_template = 'admin/list.html'
+  create_template = 'admin/create.html'
 
-  def is_accessible(self):
-    return current_user.is_authenticated()
 
 admin = Admin(app, name='Negocio123')
 admin.add_view(MyView(Step, db.session))

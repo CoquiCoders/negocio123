@@ -1,6 +1,8 @@
 {% extends "admin/model/edit.html" %}
 
+
 {% block head %}
+  <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/edit.css') }}">
   <script type="text/javascript" src="{{ url_for('static', filename='js/vendor/tinymce/tinymce.min.js') }}"></script>
 {% endblock head %}
 
