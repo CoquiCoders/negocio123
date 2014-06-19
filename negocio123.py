@@ -3,7 +3,8 @@ from flask import Flask, render_template, redirect, url_for, abort, request, fla
 from flask.ext.admin.contrib.sqla import ModelView
 from flask.ext.admin import Admin
 
-from flask.ext.login import LoginManager, login_user, UserMixin, login_required, current_user
+from flask.ext.login import LoginManager, login_user, UserMixin, login_required, current_user, logout_user
+import bcrypt
 
 from flask.ext.sqlalchemy import SQLAlchemy
 from wtforms.fields import TextAreaField
@@ -81,6 +82,7 @@ admin.add_view(MyView(Step, db.session))
 
 @app.route('/')
 def index():
+  logout_user()
   steps = Step.query.all()
   print current_user
   return render_template('index.html', steps=steps)
@@ -102,9 +104,12 @@ def login():
     return render_template('login.html')
   email = request.form['email']
   password = request.form['password']
-  registered_user = User.query.filter_by(email=email, password=password).first()
+  registered_user = User.query.filter_by(email=email).first()
   if registered_user is None:
     flash('Username or Password invalid', 'error')
+    return redirect(url_for('login'))
+  elif bcrypt.hashpw(str(password), str(registered_user.password)) != str(registered_user.password):
+    flash('Password wrong', 'error')
     return redirect(url_for('login'))
   login_user(registered_user)
   flash('Logged in succesfully')
