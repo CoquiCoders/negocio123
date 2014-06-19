@@ -47,6 +47,7 @@ class Step(db.Model):
   def __repr__(self):
     return '<Step: %r>' % self.title
 
+
 class User(db.Model):
   id = db.Column(db.Integer, primary_key=True)
   email = db.Column(db.String(50), unique=True, index=True)
@@ -79,9 +80,16 @@ class MyView(ModelView):
   def is_accessible(self):
     return current_user.is_authenticated()
 
+class UserView(ModelView):
+  column_list = ('email',)
+  list_template = 'admin/userlist.html'
+  can_edit = False
+  
+    
 
 admin = Admin(app, name='Negocio123')
 admin.add_view(MyView(Step, db.session))
+admin.add_view(UserView(User, db.session))
 
 @app.route('/')
 def index():

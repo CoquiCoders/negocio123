@@ -6,7 +6,8 @@ Webpage that guides future business owners through the process to start their bu
 To-Do
 =====
 
-- [ ] Implement authentication for admin (Flask-login)
+- [x] Implement authentication for admin (Flask-login)
+- [ ] Add admin page to add new users.
 - [ ] Implement Progress Wheel
 - [ ] Add next and prev buttons to each step
 - [ ] Implement Flask-Babel in an optional way
