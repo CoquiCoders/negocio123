@@ -1,9 +1,11 @@
-from flask import Flask, render_template, redirect, url_for, abort
+from flask import Flask, render_template, redirect, url_for, abort, request, flash
 
-from flask.ext.sqlalchemy import SQLAlchemy
 from flask.ext.admin.contrib.sqla import ModelView
 from flask.ext.admin import Admin
+
 from flask.ext.login import LoginManager, login_user, UserMixin, login_required, current_user
+
+from flask.ext.sqlalchemy import SQLAlchemy
 from wtforms.fields import TextAreaField
 
 
@@ -11,9 +13,19 @@ app = Flask(__name__)
 app.debug = True
 app.secret_key = 'A0Zr98j/3yX R~XHH!jmN]LWXD2D256y2'
 
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///dump.db'
+app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///dump.sqlite3'
 db = SQLAlchemy(app)
 
+#
+# Flask-login
+#
+
+login_manager = LoginManager()
+login_manager.init_app(app)
+@login_manager.user_loader
+def load_user(id):
+  return User.query.get(int(id))
+login_manager.login_view = 'login'
 
 # 
 # Database
@@ -34,6 +46,26 @@ class Step(db.Model):
   def __repr__(self):
     return '<Step: %r>' % self.title
 
+class User(db.Model):
+  id = db.Column(db.Integer, primary_key=True)
+  email = db.Column(db.String(50), unique=True, index=True)
+  password = db.Column(db.String)
+
+  def is_authenticated(self):
+    return True
+
+  def is_active(self):
+    return True
+
+  def is_anonymous(self):
+    return False
+
+  def get_id(self):
+    return unicode(self.id)
+
+  def __repr__(self):
+    return "<User %r>" % self.email
+
 # 
 # Flask-admin
 # 
@@ -50,9 +82,11 @@ admin.add_view(MyView(Step, db.session))
 @app.route('/')
 def index():
   steps = Step.query.all()
+  print current_user
   return render_template('index.html', steps=steps)
 
 @app.route('/<step_number>/')
+@login_required
 def step(step_number=None):
   steps = Step.query.all()
   if not step_number:
@@ -61,6 +95,20 @@ def step(step_number=None):
   if not current_step:
     abort(404)
   return render_template('step.html', steps=steps, current_step=current_step)
+
+@app.route('/login', methods=['GET', 'POST'])
+def login():
+  if request.method == 'GET':
+    return render_template('login.html')
+  email = request.form['email']
+  password = request.form['password']
+  registered_user = User.query.filter_by(email=email, password=password).first()
+  if registered_user is None:
+    flash('Username or Password invalid', 'error')
+    return redirect(url_for('login'))
+  login_user(registered_user)
+  flash('Logged in succesfully')
+  return redirect(url_for('index'))
 
 @app.errorhandler(404)
 def page_not_found(error):
