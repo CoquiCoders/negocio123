@@ -11,4 +11,4 @@ To-Do
 - [ ] Add next and prev buttons to each step
 - [ ] Implement Flask-Babel in an optional way
 - [ ] Travis, engine-light, CFA-project-monitor(Erica)
-- [ ] Write MOAR unit tests
+- [ ] Write MOAR unit tests (login functionality)

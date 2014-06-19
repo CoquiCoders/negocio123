@@ -76,13 +76,15 @@ class MyView(ModelView):
   list_template = 'admin/list.html'
   create_template = 'admin/create.html'
 
+  def is_accessible(self):
+    return current_user.is_authenticated()
+
 
 admin = Admin(app, name='Negocio123')
 admin.add_view(MyView(Step, db.session))
 
 @app.route('/')
 def index():
-  logout_user()
   steps = Step.query.all()
   print current_user
   return render_template('index.html', steps=steps)

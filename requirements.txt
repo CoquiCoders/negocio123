@@ -8,5 +8,8 @@ MarkupSafe==0.23
 SQLAlchemy==0.9.4
 WTForms==2.0
 Werkzeug==0.9.6
+bcrypt==1.0.2
+cffi==0.8.2
 itsdangerous==0.24
+pycparser==2.10
 wsgiref==0.1.2
