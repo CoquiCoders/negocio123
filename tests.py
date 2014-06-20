@@ -96,7 +96,13 @@ class LoginTestCase(TestCase):
 
   def test_unauthenticated_admin_should_redirect_to_login(self):
     rv = self.client.get('/admin/')
-    self.assertRedirects(rv, '/login')
+    self.assertRedirects(rv, '/login?next=%2Fadmin')
+
+  def test_successful_login_redirects_to_next(self):
+    rv = self.client.post('/login?next=%2Fadmin', data=dict(
+      email='christian.etpr10@gmail.com',
+      password='sbfamily1'))
+    self.assertRedirects(rv, '/admin')
 
 
 if __name__ == '__main__':
