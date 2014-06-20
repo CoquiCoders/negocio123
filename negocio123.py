@@ -1,3 +1,9 @@
+'''
+Negocio123 is a simple webapp that provides citizens with a step-by-step guide to open a new business.
+The steps are modular and independent making the information customizable in the admin page. This
+should help with maintaining the information up to date, as anyone could potentially modify it.
+'''
+
 from urllib import urlencode
 
 from flask import Flask, render_template, redirect, url_for, abort, request, flash
@@ -22,7 +28,6 @@ db = SQLAlchemy(app)
 #
 # Flask-login
 #
-
 login_manager = LoginManager()
 login_manager.init_app(app)
 @login_manager.user_loader
@@ -34,6 +39,9 @@ login_manager.login_view = 'login'
 # Database
 # 
 class Step(db.Model):
+  '''
+  Model to represent a Step in opening a new business.
+  '''
   id = db.Column(db.Integer, primary_key=True)
   full_title = db.Column(db.String(80), unique=True)
   short_title = db.Column(db.String(16), unique=True)
@@ -51,6 +59,9 @@ class Step(db.Model):
 
 
 class User(db.Model):
+  '''
+  Simple User model used to login to the admin view.
+  '''
   id = db.Column(db.Integer, primary_key=True)
   email = db.Column(db.String(50), unique=True, index=True)
   password = db.Column(db.String)
@@ -74,14 +85,16 @@ class User(db.Model):
 # Flask-admin
 # 
 class LoginAdminIndexView(AdminIndexView):
-
+  '''
+  Override to make the complete admin section login_required
+  '''
   @expose('/')
   def index(self):
     if not current_user.is_authenticated():
       return redirect('/login?' + urlencode({"next": '/admin'}), 302)
     return super(LoginAdminIndexView, self).index()
 
-class StepView(ModelView):  
+class StepView(ModelView):
   form_overrides = dict(type_of_process=TextAreaField, papers_to_fill=TextAreaField, attention=TextAreaField,)
   edit_template = 'admin/edit.html'
   list_template = 'admin/list.html'
