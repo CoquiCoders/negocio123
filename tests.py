@@ -30,11 +30,6 @@ class StepsTestCase(unittest.TestCase):
     steps = []
     steps.append(Step(full_title='Departamento de Estado', short_title='Dept Estado', description='Es el primer paso para incorporar tu negocio.', time_period='El tramite se realiza en el dia.', online=True, step_cost='150 USD para corporaciones con fines de lucro. 5 USD para corporaciones sin fines de lucro. 10 USD por el tramite de certificado de existencia'))
     steps.append(Step(full_title='IRS (Internal Revenue Service)', short_title='IRS', description='Es el segundo paso para incorporar tu negocio. En este paso obtendras el EIN ( Numero de Identificacion de Empleador)', time_period='El tramite se realiza en el dia.', online=True, step_cost='El tramite es gratuito'))
-    steps.append(Step(full_title='Departamento de Hacienda', short_title='Hacienda', description='Es el tercer paso para incorporar tu negocio. En este paso obtendras el registro de comerciante.', time_period='Incluso si se realiza el tramite online, el certificado en papel demora aproximadamente 7 dias.', online=True, step_cost='El tramite es gratuito'))
-    steps.append(Step(full_title='Municipios', short_title='Municipios', description='Es el cuarto paso para incorporar tu negocio. Recuerda que cada municipio tiene diferentes requisitos.', time_period='Varia de acuerdo al municipio.', online=False, step_cost='El tramite varia de acuerdo al tipo de negocio. Entre 25 y 100 USD para la radicacion de la solicitud.'))
-    steps.append(Step(full_title='Corporacion del Fondo de Seguro', short_title='Corporacion', description='Es el quinto paso para incorporar tu negocio', time_period='Depende', online=False, step_cost='Depende'))
-    steps.append(Step(full_title='Departamento del Trabajo', short_title='Dept Trabajo', description='Es el sexto paso para incorporar tu negocio', time_period='Depende', online=False, step_cost='Depende'))
-    steps.append(Step(full_title='Cuenta Bancaria', short_title='Banco', description='Es el ultimo paso para incorporar tu negocio', time_period='Depende', online=False, step_cost='El tramite es gratuito'))
     for step in steps:
       db.session.add(step)
     db.session.commit()
@@ -53,8 +48,47 @@ class StepsTestCase(unittest.TestCase):
     self.assertEquals(200, rv.status_code)
 
   def test_step_view_upper_limit_return_404(self):
-    rv = self.app.get('/8/')
+    rv = self.app.get('/3/')
     self.assertEquals(404, rv.status_code)
+
+class LoginTestCase(unittest.TestCase):
+
+  def setUp(self):
+    app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///dump.sqlite3'
+    db.create_all()
+    self.app = app.test_client()
+
+  def tearDown(self):
+    pass
+
+  def login(self, email, password):
+    return self.app.post('/login', data=dict(
+      email=email,
+      password=password)
+    , follow_redirects=True)
+
+  def logout(self):
+    self.app.get('/logout', follow_redirects=True)
+
+  def test_invalid_login(self):
+    rv = self.login('someone@random.com', 'noaccount')
+    assert 'Username or Password invalid' in rv.data
+
+  def test_valid_login(self):
+    rv = self.login('christian.etpr10@gmail.com', 'sbfamily1')
+    assert 'Logged in succesfully' in rv.data
+
+  def test_steps_admin_unaccessible_without_login(self):
+    rv = self.app.get('/admin', follow_redirects=True)
+    assert 'Step' not in rv.data
+    assert 'User' not in rv.data
+
+  def test_steps_admin_accessible_with_login(self):
+    self.login('christian.etpr10@gmail.com', 'sbfamily1')
+    rv = self.app.get('/admin', follow_redirects=True)
+    assert 'Step' in rv.data
+    assert 'User' in rv.data
+
 
 if __name__ == '__main__':
   unittest.main()

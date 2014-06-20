@@ -1,4 +1,5 @@
-from app import db, Step
+from negocio123 import db, Step, User
+import bcrypt
 
 db.drop_all()
 db.create_all()
@@ -21,5 +22,10 @@ steps.append(Step(full_title='Cuenta Bancaria', short_title='Banco', description
 
 for step in steps:
   db.session.add(step)
+
+email = 'christian.etpr10@gmail.com'
+password = bcrypt.hashpw('sbfamily1', bcrypt.gensalt())
+
+db.session.add(User(email=email, password=password))
 
 db.session.commit()

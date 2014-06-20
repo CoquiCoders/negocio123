@@ -84,7 +84,9 @@ class UserView(ModelView):
   column_list = ('email',)
   list_template = 'admin/userlist.html'
   can_edit = False
-  
+
+  def is_accessible(self):
+    return current_user.is_authenticated()  
     
 
 admin = Admin(app, name='Negocio123')
@@ -98,7 +100,6 @@ def index():
   return render_template('index.html', steps=steps)
 
 @app.route('/<step_number>/')
-@login_required
 def step(step_number=None):
   steps = Step.query.all()
   if not step_number:
