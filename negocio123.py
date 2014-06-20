@@ -1,7 +1,7 @@
 from flask import Flask, render_template, redirect, url_for, abort, request, flash
 
 from flask.ext.admin.contrib.sqla import ModelView
-from flask.ext.admin import Admin
+from flask.ext.admin import Admin, AdminIndexView, expose
 
 from flask.ext.login import LoginManager, login_user, UserMixin, login_required, current_user, logout_user
 import bcrypt
@@ -71,7 +71,15 @@ class User(db.Model):
 # 
 # Flask-admin
 # 
-class MyView(ModelView):  
+class LoginAdminIndexView(AdminIndexView):
+
+  @expose('/')
+  def index(self):
+    if not current_user.is_authenticated():
+      return redirect('/login', 302)
+    return super(LoginAdminIndexView, self).index()
+
+class StepView(ModelView):  
   form_overrides = dict(type_of_process=TextAreaField, papers_to_fill=TextAreaField, attention=TextAreaField,)
   edit_template = 'admin/edit.html'
   list_template = 'admin/list.html'
@@ -87,16 +95,14 @@ class UserView(ModelView):
 
   def is_accessible(self):
     return current_user.is_authenticated()  
-    
 
-admin = Admin(app, name='Negocio123')
-admin.add_view(MyView(Step, db.session))
+admin = Admin(app, name='Negocio123', index_view=LoginAdminIndexView())
+admin.add_view(StepView(Step, db.session))
 admin.add_view(UserView(User, db.session))
 
 @app.route('/')
 def index():
   steps = Step.query.all()
-  print current_user
   return render_template('index.html', steps=steps)
 
 @app.route('/<step_number>/')
@@ -124,6 +130,11 @@ def login():
     return redirect(url_for('login'))
   login_user(registered_user)
   flash('Logged in succesfully')
+  return redirect(url_for('index'))
+
+@app.route('/logout')
+def logout():
+  logout_user()
   return redirect(url_for('index'))
 
 @app.errorhandler(404)
