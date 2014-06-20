@@ -1,3 +1,5 @@
+from urllib import urlencode
+
 from flask import Flask, render_template, redirect, url_for, abort, request, flash
 
 from flask.ext.admin.contrib.sqla import ModelView
@@ -76,7 +78,7 @@ class LoginAdminIndexView(AdminIndexView):
   @expose('/')
   def index(self):
     if not current_user.is_authenticated():
-      return redirect('/login', 302)
+      return redirect('/login?' + urlencode({"next": '/admin'}), 302)
     return super(LoginAdminIndexView, self).index()
 
 class StepView(ModelView):  
@@ -130,6 +132,9 @@ def login():
     return redirect(url_for('login'))
   login_user(registered_user)
   flash('Logged in succesfully')
+  next = request.args.get('next', None)
+  if next:
+    return redirect(next)
   return redirect(url_for('index'))
 
 @app.route('/logout')
