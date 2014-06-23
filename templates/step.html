@@ -7,7 +7,7 @@
           <p class="header-p">{{ current_step.description }}</p>
         </div>
         <div class="w-col w-col-5">
-          <p class='progress-wheel'>Progress wheel</p>
+          <img class="progress-wheel" width="100" src="{{ url_for('static', filename='images') }}/progress{{ current_step.id }}.png" alt="Step number {{ current_step.id }}">
         </div>
       </div>
       <div class="section">
