@@ -1,1 +1,1 @@
-web: gunicorn app:negocio123
+web: gunicorn negocio123:app
