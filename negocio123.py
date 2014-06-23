@@ -120,7 +120,9 @@ class UserView(ModelView):
 
 admin = Admin(app, name='Negocio123', index_view=LoginAdminIndexView())
 admin.add_view(StepView(Step, db.session))
-admin.add_view(UserView(User, db.session))
+
+# TODO get bcrypt to work with this thing
+# admin.add_view(UserView(User, db.session))
 
 @app.route('/')
 def index():

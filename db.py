@@ -23,8 +23,13 @@ steps.append(Step(full_title='Cuenta Bancaria', short_title='Banco', description
 for step in steps:
   db.session.add(step)
 
-email = 'christian.etpr10@gmail.com'
-password = bcrypt.hashpw('sbfamily1', bcrypt.gensalt())
+email = 'crodriguez@codeforamerica.org'
+password = bcrypt.hashpw('coquicoders', bcrypt.gensalt())
+
+db.session.add(User(email=email, password=password))
+
+email = 'clara@codeforamerica.org'
+password = bcrypt.hashpw('coquicoders', bcrypt.gensalt())
 
 db.session.add(User(email=email, password=password))
 
