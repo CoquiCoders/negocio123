@@ -8,8 +8,8 @@ To-Do
 
 - [x] Implement authentication for admin (Flask-login)
 - [ ] Add admin page to add new users.
-- [ ] Implement Progress Wheel
 - [ ] Add next and prev buttons to each step
 - [ ] Implement Flask-Babel in an optional way
 - [ ] Travis, engine-light, CFA-project-monitor(Erica)
 - [ ] Write MOAR unit tests (login functionality)
+- [ ] Implement Progress Wheel

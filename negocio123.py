@@ -4,6 +4,8 @@ The steps are modular and independent making the information customizable in the
 should help with maintaining the information up to date, as anyone could potentially modify it.
 '''
 
+import os
+
 from urllib import urlencode
 
 from flask import Flask, render_template, redirect, url_for, abort, request, flash
@@ -19,10 +21,15 @@ from wtforms.fields import TextAreaField
 
 
 app = Flask(__name__)
-app.debug = True
+
+if os.getenv('DEBUG') == 'false':
+  app.debug = False
+else:
+  app.debug = True
+
 app.secret_key = 'A0Zr98j/3yX R~XHH!jmN]LWXD2D256y2'
 
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///dump.sqlite3'
+  app.config['SQLALCHEMY_DATABASE_URI'] = os.getenv('DATABASE_URL', 'sqlite:///dump.sqlite3')
 db = SQLAlchemy(app)
 
 #
