@@ -29,7 +29,7 @@ else:
 
 app.secret_key = 'A0Zr98j/3yX R~XHH!jmN]LWXD2D256y2'
 
-  app.config['SQLALCHEMY_DATABASE_URI'] = os.getenv('DATABASE_URL', 'sqlite:///dump.sqlite3')
+app.config['SQLALCHEMY_DATABASE_URI'] = os.getenv('DATABASE_URL', 'sqlite:///dump.sqlite3')
 db = SQLAlchemy(app)
 
 #
