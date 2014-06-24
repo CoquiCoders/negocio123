@@ -11,7 +11,7 @@ h1 {
   padding-top: 1px;
   float: none;
   font-family: Lato, sans-serif;
-  color: #e31f2b;
+  color: #97E8C1;
   font-size: 36px;
   line-height: 39px;
   font-weight: 800;
@@ -71,7 +71,7 @@ p {
   padding: 9px 21px;
   float: none;
   border-radius: 10px;
-  background-color: #e31f2b;
+  background-color: #97E8C1;
   color: white;
   font-size: 23px;
   line-height: 38px;
@@ -79,7 +79,7 @@ p {
   text-decoration: none;
 }
 .button:hover {
-  background-color: #441513;
+  background-color: #97E8C1;
 }
 .button.action {
   padding: 17px 28px;
@@ -122,14 +122,14 @@ p {
   padding: 20px 12px 20px 18px;
   float: left;
   clear: none;
-  background-color: #e31f2b;
+  background-color: #97E8C1;
   color: white;
   font-size: 15px;
   line-height: 19px;
   text-decoration: none;
 }
 .nav-link:hover {
-  background-color: #441513;
+  background-color: #97E8C1;
 }
 .nav-link.last {
   float: left;
@@ -147,7 +147,7 @@ p {
   text-align: right;
 }
 .nav-section {
-  background-color: #e31f2b;
+  background-color: #97E8C1;
 }
 .hero-image {
   width: 60%;
@@ -260,7 +260,7 @@ p {
   padding-right: 0px;
   padding-left: 0px;
   float: right;
-  background-color: #e31f2b;
+  background-color: #97E8C1;
 }
 .logo {
   padding-top: 0px;
