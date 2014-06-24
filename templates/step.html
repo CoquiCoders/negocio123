@@ -19,18 +19,24 @@
             <div>{{ current_step.time_period }}&nbsp;</div>
           </div>
           <div class="w-col w-col-4 managing-expectations">
-            {% if current_step.online %}
+            {% if current_step.online and current_step.offline %}
             <img src="{{ url_for('static', filename='images/online.png') }}" alt="online.png">
             <div><strong class="managing-p">¿Es online u offline?</strong>
             </div>
-              <div class="online-offline">Es un trámite online.&nbsp;&nbsp;&nbsp;<strong>100</strong>%</div>
+              <div class="online-offline">Es un trámite online y offline.&nbsp;&nbsp;&nbsp;</div>
+              <a href="#"></a>
+            {% elif current_step.online %}
+            <img src="{{ url_for('static', filename='images/online.png') }}" alt="online.png">
+            <div><strong class="managing-p">¿Es online u offline?</strong>
+            </div>
+              <div class="online-offline">Es un trámite online solamente.&nbsp;&nbsp;&nbsp;</div>
               <a href="#"></a>
             {% else %}
             <img src="{{ url_for('static', filename='images/offline.png') }}" alt="offline.png">
             <div><strong class="managing-p">¿Es online u offline?</strong>
             </div>
-              <div class="online-offline">Es un trámite offline.&nbsp;&nbsp;&nbsp;</div>
-              <a href="#"></a>        
+              <div class="online-offline">Es un trámite offline solamente.&nbsp;&nbsp;&nbsp;</div>
+              <a href="#"></a>
             {% endif %}
           </div>
           <div class="w-col w-col-4 managing-expectations">

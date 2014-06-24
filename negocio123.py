@@ -55,6 +55,7 @@ class Step(db.Model):
   description = db.Column(db.String(140))
   time_period = db.Column(db.String(140))
   online = db.Column(db.Boolean)
+  offline = db.Column(db.Boolean)
   step_cost = db.Column(db.String)
   type_of_process = db.Column(db.String)
   papers_to_fill = db.Column(db.String)

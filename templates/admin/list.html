@@ -31,6 +31,9 @@
     <span class='edit_header'> Online </span>
   </th>
   <th class="column-header">
+    <span class='edit_header'> Offline </span>
+  </th>
+  <th class="column-header">
     <span class='edit_header'> Step Cost </span>
   </th>
   <th class="column-header">
@@ -71,6 +74,7 @@
   <td>{{ get_value(row, 'description') }}</td>
   <td>{{ get_value(row, 'time_period') }}</td>
   <td>{{ get_value(row, 'online') }}</td>
+  <td>{{ get_value(row, 'offline') }}</td>
   <td>{{ get_value(row, 'step_cost') }}</td>
   <td> <a href="{{ get_value(row, 'step_url') }}" target='_blank'> {{ get_value(row, 'step_url') }} </a> </td>
 {% endblock list_row %}
