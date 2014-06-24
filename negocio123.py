@@ -151,6 +151,9 @@ def step(step_number=None):
   current_step = Step.query.get(step_number)
   if not current_step:
     abort(404)
+  elif current_step.full_title == 'Municipios':
+    municipios = Municipio.query.all()
+    return render_template('municipios.html', steps=steps, current_step=current_step, municipios=municipios)
   return render_template('step.html', steps=steps, current_step=current_step)
 
 @app.route('/login', methods=['GET', 'POST'])

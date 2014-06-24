@@ -1,0 +1,48 @@
+{% extends "layout.html" %}
+
+{% block content %}
+      <div class="w-row">
+        <div class="w-col w-col-7">
+          <h1>{{ current_step.full_title }} &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</h1>
+          <p class="header-p">{{ current_step.description }}</p>
+        </div>
+        <div class="w-col w-col-5">
+          <img class="progress-wheel" width="100" src="{{ url_for('static', filename='images') }}/progress{{ current_step.id }}.png" alt="Step number {{ current_step.id }}">
+        </div>
+      </div>
+      <div class='w-row'>
+        <div class='w-col w-col-6 w-col-small-6 w-col-tiny-6 column-center' style='margin-bottom: 20px;'>
+          <select class="w-select municipio-select" required="required">
+            <option value="None"> Elije tu municipio </option>
+            {% for mun in municipios|sort(attribute='name') %}
+              <option value='{{ mun.name }}' data-url='{{ mun.url }}'>{{ mun.name }}</option>
+            {% endfor %}
+          </select>
+
+          <a href="" id='url-display' target="_blank"> <h2></h2> </a>
+        </div>
+      </div>
+      <div class="w-row">
+        {% if current_step.id == 1 %}
+          <div class="w-col w-col-6 w-col-small-6 w-col-tiny-6 column-center"><a class="button btn-small" href="/">Home</a></div>
+        {% else %}
+          <div class="w-col w-col-6 w-col-small-6 w-col-tiny-6 column-center"><a class="button btn-small" href="/{{ current_step.id - 1 }}">Anterior</a></div>
+        {% endif %}
+        <div class="w-col w-col-6 w-col-small-6 w-col-tiny-6 column-center"><a class="button btn-small" href="/{{ current_step.id + 1 }}">Siguiente</a>
+        </div>
+      </div>
+{% endblock content %}
+
+{% block javascripts %}
+  <script type="text/javascript">
+  $('.municipio-select').change(function(e) {
+    var url = $('.municipio-select').find(':selected').attr('data-url')
+    if (url != 'None') {
+      $('#url-display').attr('href', url);
+      $('#url-display h2').text("Ir a la pagina web del municipio.");
+    } else{
+      $('#url-display h2').text("Disculpa, este municipio no tiene pagina web.");
+    };
+  });
+  </script>
+{% endblock javascripts %}
