@@ -89,6 +89,18 @@ class User(db.Model):
   def __repr__(self):
     return "<User %r>" % self.email
 
+class Municipio(db.Model):
+  '''
+  Model to capture Puerto Rico Municipalities and their distinct webpages
+  '''
+  id = db.Column(db.Integer, primary_key=True)
+  name = db.Column(db.String(80), unique=True)
+  url = db.Column(db.String(80))
+
+  def __repr__(self):
+    return "<Municipio %r>" % self.name
+
+
 # 
 # Flask-admin
 # 
@@ -111,16 +123,17 @@ class StepView(ModelView):
   def is_accessible(self):
     return current_user.is_authenticated()
 
-class UserView(ModelView):
-  column_list = ('email',)
-  list_template = 'admin/userlist.html'
-  can_edit = False
+# class UserView(ModelView):
+#   column_list = ('email',)
+#   list_template = 'admin/userlist.html'
+#   can_edit = False
 
-  def is_accessible(self):
-    return current_user.is_authenticated()  
+#   def is_accessible(self):
+#     return current_user.is_authenticated()  
 
 admin = Admin(app, name='Negocio123', index_view=LoginAdminIndexView())
 admin.add_view(StepView(Step, db.session))
+admin.add_view(ModelView(Municipio, db.session))
 
 # TODO get bcrypt to work with this thing
 # admin.add_view(UserView(User, db.session))
