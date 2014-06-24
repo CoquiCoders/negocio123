@@ -80,19 +80,17 @@ class LoginTestCase(TestCase):
     assert 'Username or Password invalid' in rv.data
 
   def test_valid_login(self):
-    rv = self.login('christian.etpr10@gmail.com', 'sbfamily1')
+    rv = self.login('crodriguez@codeforamerica.org', 'coquicoders')
     assert 'Logged in succesfully' in rv.data
 
   def test_admin_unaccessible_without_login(self):
     rv = self.client.get('/admin', follow_redirects=True)
     assert 'Step' not in rv.data
-    assert 'User' not in rv.data
 
   def test_admin_accessible_with_login(self):
-    self.login('christian.etpr10@gmail.com', 'sbfamily1')
+    self.login('crodriguez@codeforamerica.org', 'coquicoders')
     rv = self.client.get('/admin', follow_redirects=True)
     assert 'Step' in rv.data
-    assert 'User' in rv.data
 
   def test_unauthenticated_admin_should_redirect_to_login(self):
     rv = self.client.get('/admin/')
@@ -100,10 +98,26 @@ class LoginTestCase(TestCase):
 
   def test_successful_login_redirects_to_next(self):
     rv = self.client.post('/login?next=%2Fadmin', data=dict(
-      email='christian.etpr10@gmail.com',
-      password='sbfamily1'))
+      email='crodriguez@codeforamerica.org',
+      password='coquicoders'))
     self.assertRedirects(rv, '/admin')
 
+
+class MunicipioTestCase(TestCase):
+
+  render_templates = False
+
+  def create_app(self):
+    app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///dump.sqlite3'
+    return app
+
+  def test_municipio_template_used_on_municipio(self):
+    rv = self.client.get('/4/')
+    self.assert_template_used('municipios.html')
+
+  def test_municipio_template_not_used_on_other_steps(self):
+    rv = self.client.get('/1/')
+    self.assert_template_used('step.html')
 
 if __name__ == '__main__':
   unittest.main()
