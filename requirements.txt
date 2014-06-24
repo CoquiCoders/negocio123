@@ -19,4 +19,5 @@ itsdangerous==0.24
 passlib==1.6.2
 psycopg2==2.5.3
 pycparser==2.10
+selenium==2.42.1
 wsgiref==0.1.2

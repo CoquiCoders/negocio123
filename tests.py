@@ -1,4 +1,6 @@
 import unittest
+from selenium import webdriver
+from selenium.webdriver.common.keys import Keys
 from flask import Flask
 from negocio123 import app, db, Step
 from flask.ext.testing import TestCase
@@ -118,6 +120,25 @@ class MunicipioTestCase(TestCase):
   def test_municipio_template_not_used_on_other_steps(self):
     rv = self.client.get('/1/')
     self.assert_template_used('step.html')
+
+class NavigationTestCase(TestCase):
+
+  def create_app(self):
+    app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///dump.sqlite3'
+    return app
+
+  def setUp(self):
+    self.driver = webdriver.Chrome()
+
+  def tearDown(self):
+    self.driver.close()
+
+  def test_steps_begin(self):
+    driver = self.driver
+    driver.get('http://localhost:5000/')
+    btn = driver.find_element_by_id('comenzar')
+    btn.send_keys(Keys.RETURN)
+    self.assertEquals('http://localhost:5000/1/', driver.current_url)
 
 if __name__ == '__main__':
   unittest.main()
