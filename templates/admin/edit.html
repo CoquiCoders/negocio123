@@ -10,7 +10,9 @@
   {{ super() }}
     <script type="text/javascript">
     tinymce.init({
-      selector: "textarea"
+      selector: "textarea",
+      plugins: "link image",
+      relative_urls: false
    });
   </script>
 {% endblock tail %}
