@@ -19,6 +19,11 @@ import bcrypt
 from flask.ext.sqlalchemy import SQLAlchemy
 from wtforms.fields import TextAreaField
 
+#################
+#
+# Initializations
+#
+##################
 
 app = Flask(__name__)
 
@@ -32,9 +37,11 @@ app.secret_key = 'A0Zr98j/3yX R~XHH!jmN]LWXD2D256y2'
 app.config['SQLALCHEMY_DATABASE_URI'] = os.getenv('DATABASE_URL', 'sqlite:///dump.sqlite3')
 db = SQLAlchemy(app)
 
+#############
 #
 # Flask-login
 #
+#############
 login_manager = LoginManager()
 login_manager.init_app(app)
 @login_manager.user_loader
@@ -42,9 +49,11 @@ def load_user(id):
   return User.query.get(int(id))
 login_manager.login_view = 'login'
 
+############
 # 
 # Database
 # 
+############
 class Step(db.Model):
   '''
   Model to represent a Step in opening a new business.
@@ -100,10 +109,11 @@ class Municipio(db.Model):
   def __repr__(self):
     return "<Municipio %r>" % self.name
 
-
+##############
 # 
 # Flask-admin
 # 
+##############
 class LoginAdminIndexView(AdminIndexView):
   '''
   Override to make the complete admin section login_required
@@ -137,6 +147,12 @@ admin.add_view(ModelView(Municipio, db.session))
 
 # TODO get bcrypt to work with this thing
 # admin.add_view(UserView(User, db.session))
+
+############
+#
+# Routes
+#
+############
 
 @app.route('/')
 def index():
