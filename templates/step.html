@@ -78,7 +78,12 @@
         {% else %}
           <div class="w-col w-col-6 w-col-small-6 w-col-tiny-6 column-center"><a class="button btn-small" href="/{{ current_step.id - 1 }}">Anterior</a></div>
         {% endif %}
-        <div class="w-col w-col-6 w-col-small-6 w-col-tiny-6 column-center"><a class="button btn-small" href="/{{ current_step.id + 1 }}">Siguiente</a>
+        {% if current_step.id == steps|length %}
+        <div class="w-col w-col-6 w-col-small-6 w-col-tiny-6 column-center"><a class="button btn-small" href="/">Home</a>
         </div>
+        {% else %}
+          <div class="w-col w-col-6 w-col-small-6 w-col-tiny-6 column-center"><a class="button btn-small" href="/{{ current_step.id + 1 }}">Siguiente</a>
+          </div>
+        {% endif %}
       </div>
 {% endblock content %}
