@@ -4,6 +4,24 @@
 <a href="/"> <span class="brand">Negocio123</span> </a>
 {% endblock brand %}
 
+
+{% block main_menu %}
+<ul class="nav">  
+  <li class="active">
+    <a href="/admin/">Home</a>
+  </li>  
+  <li>
+    <a href="/admin/stepview/">Step</a>
+  </li>
+  <li>
+    <a href="/admin/municipioview/">Municipio</a>
+  </li>
+  <li>
+    <a href="/adduser/">Add User</a>
+  </li>
+</ul>
+{% endblock main_menu %}
+
 {% block body %}
   <h3>Negocio123 Admin Interface</h3>
   <p style="font-size: 20px;">In this admin interface you can do two things:</p>

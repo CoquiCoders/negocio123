@@ -187,15 +187,29 @@ def login():
     return redirect(url_for('login'))
   login_user(registered_user)
   flash('Logged in succesfully')
-  next = request.args.get('next', None)
-  if next:
-    return redirect(next)
-  return redirect(url_for('index'))
+  return redirect('/admin')
 
 @app.route('/logout')
 def logout():
   logout_user()
   return redirect(url_for('index'))
+
+@app.route('/adduser/', methods=['GET', 'POST'])
+@login_required
+def add_user():
+  if request.method == 'GET':
+    return render_template('add_user.html')
+  email = request.form['email']
+  password = request.form['password']
+  confirmation = request.form['confirmation']
+  if password != confirmation:
+    flash('Passwords did not match')
+    return render_template('add_user.html')
+  password = bcrypt.hashpw(str(password), bcrypt.gensalt())
+  db.session.add(User(email=email, password=password))
+  db.session.commit()
+  flash('User created successfully')
+  return render_template('add_user.html')
 
 @app.errorhandler(404)
 def page_not_found(error):

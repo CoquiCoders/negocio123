@@ -1,0 +1,13 @@
+{% extends "layout.html" %}
+
+{% block content %}
+  <h1>Add User</h1>
+  <form action='' method='post'>
+    <input type='email' name='email' placeholder='Email'> <br> <br>
+    <input type='password' name='password' placeholder='Password'> <br> <br>
+    <input type='password' name='confirmation' placeholder='Confirm Password'> <br> <br>
+    <button type='submit' class='button'>Create user</button>
+  </form>
+<hr>
+  <a href="/admin" class='button'>Back to Admin</a>
+{% endblock content %}
