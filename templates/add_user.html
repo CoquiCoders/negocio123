@@ -3,11 +3,17 @@
 {% block content %}
   <h1>Add User</h1>
   <form action='' method='post'>
-    <input type='email' name='email' placeholder='Email'> <br> <br>
-    <input type='password' name='password' placeholder='Password'> <br> <br>
-    <input type='password' name='confirmation' placeholder='Confirm Password'> <br> <br>
+    <input type='email' name='email' placeholder='Email'> 
+    <input type='password' name='password' placeholder='Password'>
+    <input type='password' name='confirmation' placeholder='Confirm Password'>
     <button type='submit' class='button'>Create user</button>
   </form>
-<hr>
-  <a href="/admin" class='button'>Back to Admin</a>
+
+<h1>Active Users</h1>
+{% for user in users %}
+<p>{{ user.email }} - <a href="{{ url_for('delete_user', user_email=user.email) }}">Delete User</a> </p>
+<br> <br>
+{% endfor %}
+
+<a href="/admin" class='button'>Back to Admin</a>
 {% endblock content %}

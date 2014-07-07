@@ -194,22 +194,33 @@ def logout():
   logout_user()
   return redirect(url_for('index'))
 
-@app.route('/adduser/', methods=['GET', 'POST'])
+@app.route('/add-user/', methods=['GET', 'POST'])
 @login_required
 def add_user():
+  users = User.query.all()
   if request.method == 'GET':
-    return render_template('add_user.html')
+    return render_template('add_user.html', users=users )
   email = request.form['email']
   password = request.form['password']
   confirmation = request.form['confirmation']
   if password != confirmation:
     flash('Passwords did not match')
-    return render_template('add_user.html')
+    return render_template('add_user.html', users=users)
   password = bcrypt.hashpw(str(password), bcrypt.gensalt())
   db.session.add(User(email=email, password=password))
   db.session.commit()
   flash('User created successfully')
-  return render_template('add_user.html')
+  return render_template('add_user.html', users=users)
+
+@app.route('/delete-user/<user_email>')
+@login_required
+def delete_user(user_email=None):
+  if not user_email:
+    return redirect(url_for('add_user'))
+  user_to_delete = User.query.filter_by(email=user_email).first()
+  db.session.delete(user_to_delete)
+  db.session.commit()
+  return redirect(url_for('add_user'))
 
 @app.errorhandler(404)
 def page_not_found(error):
