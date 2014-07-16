@@ -34,7 +34,7 @@
             <nav class="w-nav-menu w-clearfix navigation-column" role="navigation">
               <div class="w-nav" data-collapse="medium" data-animation="default" data-duration="400"></div>
               {% for step in steps|sort(attribute='id') %}
-                <a class="w-nav-link nav-link" href="/{{ step.id }}"><strong>{{ step.short_title }}</strong></a>  
+                <a class="w-nav-link nav-link" href="/{{ step.id }}"><strong>{{ step.titulo_corto_de_agencia }}</strong></a>  
               {% endfor %}
             </nav>
             <div class="w-nav-button">
