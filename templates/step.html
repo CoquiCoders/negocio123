@@ -50,17 +50,17 @@
         </div>
         <div>
           {% if current_step.type_of_process %}
-            <h2>¿Qué tipo de trámites se realizan en este Departamento?</h2>
+            <h2>¿Qué tipo de trámites se realizan en la agencia o corporación pública?</h2>
             {{ current_step.type_of_process|safe }}
           {% endif %}
           
           {% if current_step.papers_to_fill %}
-            <h2>Planillas que se deben llenar</h2>
+            <h2>Requisitos</h2>
             {{ current_step.papers_to_fill|safe }}
           {% endif %}
 
           {% if current_step.attention %}
-            <h2>Prestar Atencion!</h2>
+            <h2>Consideraciones</h2>
             {{ current_step.attention|safe }}
           {% endif %}
           &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
