@@ -19,28 +19,28 @@
   {% endblock %}
   
   <th class="column-header">
-    <span class='edit_header'> Full Title </span>
+    <span class='edit_header'> Nombre de Agencia </span>
   </th>
   <th class="column-header">
-    <span class='edit_header'> Short Title </span>
+    <span class='edit_header'> Título Corto de Agencia </span>
   </th>
   <th class="column-header">
-    <span class='edit_header'> Description </span>
+    <span class='edit_header'> Descripción </span>
   </th>
   <th class="column-header">
-    <span class='edit_header'> Time Period </span>
+    <span class='edit_header'> Duración </span>
   </th>
   <th class="column-header">
-    <span class='edit_header'> Online </span>
+    <span class='edit_header'> Trámite Online </span>
   </th>
   <th class="column-header">
-    <span class='edit_header'> Offline </span>
+    <span class='edit_header'> Trámite Offline </span>
   </th>
   <th class="column-header">
-    <span class='edit_header'> Step Cost </span>
+    <span class='edit_header'> Costo de Trámite </span>
   </th>
   <th class="column-header">
-    <span class='edit_header'> URL </span>
+    <span class='edit_header'> URL de Agencia </span>
   </th>
   
 {% endblock %}
@@ -72,12 +72,12 @@
       {% endblock %}
     </td>
   {% endblock %}
-  <td>{{ get_value(row, 'full_title') }}</td>
-  <td>{{ get_value(row, 'short_title') }}</td>
-  <td>{{ get_value(row, 'description') }}</td>
-  <td>{{ get_value(row, 'time_period') }}</td>
-  <td>{{ get_value(row, 'online') }}</td>
-  <td>{{ get_value(row, 'offline') }}</td>
-  <td>{{ get_value(row, 'step_cost') }}</td>
-  <td> <a href="{{ get_value(row, 'step_url') }}" target='_blank'> {{ get_value(row, 'step_url') }} </a> </td>
+  <td>{{ get_value(row, 'nombre_de_agencia') }}</td>
+  <td>{{ get_value(row, 'titulo_corto_de_agencia') }}</td>
+  <td>{{ get_value(row, 'descripcion') }}</td>
+  <td>{{ get_value(row, 'duracion') }}</td>
+  <td>{{ get_value(row, 'tramite_online') }}</td>
+  <td>{{ get_value(row, 'tramite_offline') }}</td>
+  <td>{{ get_value(row, 'costo_de_tramite') }}</td>
+  <td> <a href="{{ get_value(row, 'step_url') }}" target='_blank'> {{ get_value(row, 'url_de_agencia') }} </a> </td>
 {% endblock list_row %}

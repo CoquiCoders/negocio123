@@ -65,18 +65,18 @@ class Step(db.Model):
   Model to represent a Step in opening a new business.
   '''
   id = db.Column(db.Integer, primary_key=True)
-  full_title = db.Column(db.String(80), unique=True)
-  short_title = db.Column(db.String(16), unique=True)
-  description = db.Column(db.String(140))
-  time_period = db.Column(db.String(140))
-  online = db.Column(db.Boolean)
-  offline = db.Column(db.Boolean)
-  step_cost = db.Column(db.String)
-  type_of_process = db.Column(db.String)
-  papers_to_fill = db.Column(db.String)
-  attention = db.Column(db.String)
-  questions = db.Column(db.String)
-  step_url = db.Column(db.String(80))
+  nombre_de_agencia = db.Column(db.String(80), unique=True)
+  titulo_corto_de_agencia = db.Column(db.String(16), unique=True)
+  descripcion = db.Column(db.String(140))
+  duracion = db.Column(db.String(140))
+  tramite_online = db.Column(db.Boolean)
+  tramite_offline = db.Column(db.Boolean)
+  costo_de_tramite = db.Column(db.String)
+  tipo_de_tramite = db.Column(db.String)
+  requisitos = db.Column(db.String)
+  consideraciones = db.Column(db.String)
+  preguntas_frecuentes = db.Column(db.String)
+  url_de_agencia = db.Column(db.String(80))
 
   def __repr__(self):
     return '<Step: %r>' % self.title
@@ -132,7 +132,7 @@ class LoginAdminIndexView(AdminIndexView):
     return super(LoginAdminIndexView, self).index()
 
 class StepView(ModelView):
-  form_overrides = dict(type_of_process=TextAreaField, papers_to_fill=TextAreaField, attention=TextAreaField, questions=TextAreaField,)
+  form_overrides = dict(tipo_de_tramite=TextAreaField, requisitos=TextAreaField, atencion=TextAreaField, preguntas_frecuentes=TextAreaField,)
   edit_template = 'admin/edit.html'
   list_template = 'admin/list.html'
   create_template = 'admin/create.html'
@@ -174,7 +174,7 @@ def step(step_number=None):
   current_step = Step.query.get(step_number)
   if not current_step:
     abort(404)
-  elif current_step.full_title == 'Municipios':
+  elif current_step.nombre_de_agencia == 'Municipios':
     municipios = Municipio.query.all()
     return render_template('municipios.html', steps=steps, current_step=current_step, municipios=municipios)
   return render_template('step.html', steps=steps, current_step=current_step)

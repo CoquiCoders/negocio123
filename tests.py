@@ -34,8 +34,8 @@ class StepsTestCase(TestCase):
   def setUp(self):
     db.create_all()
     steps = []
-    steps.append(Step(full_title='Departamento de Estado', short_title='Dept Estado', description='Es el primer paso para incorporar tu negocio.', time_period='El tramite se realiza en el dia.', online=True, step_cost='150 USD para corporaciones con fines de lucro. 5 USD para corporaciones sin fines de lucro. 10 USD por el tramite de certificado de existencia'))
-    steps.append(Step(full_title='IRS (Internal Revenue Service)', short_title='IRS', description='Es el segundo paso para incorporar tu negocio. En este paso obtendras el EIN ( Numero de Identificacion de Empleador)', time_period='El tramite se realiza en el dia.', online=True, step_cost='El tramite es gratuito'))
+    steps.append(Step(nombre_de_agencia='Departamento de Estado', titulo_corto_de_agencia='Dept Estado', descripcion='Es el primer paso para incorporar tu negocio.', duracion='El tramite se realiza en el dia.', tramite_online=True, costo_de_tramite='150 USD para corporaciones con fines de lucro. 5 USD para corporaciones sin fines de lucro. 10 USD por el tramite de certificado de existencia'))
+    steps.append(Step(nombre_de_agencia='IRS (Internal Revenue Service)', titulo_corto_de_agencia='IRS', descripcion='Es el segundo paso para incorporar tu negocio. En este paso obtendras el EIN ( Numero de Identificacion de Empleador)', duracion='El tramite se realiza en el dia.', tramite_online=True, costo_de_tramite='El tramite es gratuito'))
     for step in steps:
       db.session.add(step)
     db.session.commit()

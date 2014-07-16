@@ -3,8 +3,8 @@
 {% block content %}
   <div class="w-row">
     <div class="w-col w-col-7">
-      <h1>{{ current_step.full_title }} &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</h1>
-      <p class="header-p">{{ current_step.description }}</p>
+      <h1>{{ current_step.nombre_de_agencia }} &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</h1>
+      <p class="header-p">{{ current_step.descripcion }}</p>
     </div>
     <div class="w-col w-col-5">
       <img class="progress-wheel" width="100" src="{{ url_for('static', filename='images') }}/progress{{ current_step.id }}.png" alt="Step number {{ current_step.id }}">
@@ -16,16 +16,16 @@
         <img src="{{ url_for('static', filename='images/clock.png') }}" alt="clock">
         <div><span style="font-size: 25px;"><strong>¿Cuánto demora?</strong></span>
         </div>
-        <div>{{ current_step.time_period }}&nbsp;</div>
+        <div>{{ current_step.duracion }}&nbsp;</div>
       </div>
       <div class="w-col w-col-4 managing-expectations">
-        {% if current_step.online and current_step.offline %}
+        {% if current_step.tramite_online and current_step.tramite_offline %}
         <img src="{{ url_for('static', filename='images/online.png') }}" alt="online.png">
         <div><strong class="managing-p">¿Es online u offline?</strong>
         </div>
           <div class="online-offline">Es un trámite online y offline.&nbsp;&nbsp;&nbsp;</div>
           <a href="#"></a>
-        {% elif current_step.online %}
+        {% elif current_step.tramite_online %}
         <img src="{{ url_for('static', filename='images/online.png') }}" alt="online.png">
         <div><strong class="managing-p">¿Es online u offline?</strong>
         </div>
@@ -44,34 +44,34 @@
         <div class="managing-p"><strong class="managing-p">¿Cuánto cuesta?</strong>
         </div>
         <div>
-          {{ current_step.step_cost }}
+          {{ current_step.costo_de_tramite }}
         </div>
       </div>
     </div>
     <div>
-      {% if current_step.type_of_process %}
+      {% if current_step.tipo_de_tramite %}
         <h2>¿Qué tipo de trámites se realizan en la agencia o corporación pública?</h2>
-        {{ current_step.type_of_process|safe }}
+        {{ current_step.tipo_de_tramite|safe }}
       {% endif %}
       
-      {% if current_step.papers_to_fill %}
+      {% if current_step.requisitos %}
         <h2>Requisitos</h2>
-        {{ current_step.papers_to_fill|safe }}
+        {{ current_step.requisitos|safe }}
       {% endif %}
 
-      {% if current_step.attention %}
+      {% if current_step.consideraciones %}
         <h2>Consideraciones</h2>
-        {{ current_step.attention|safe }}
+        {{ current_step.consideraciones|safe }}
       {% endif %}
-      {% if current_step.questions %}
+      {% if current_step.preguntas_frecuentes %}
         <h2>Preguntas Frecuentes</h2>
-        {{ current_step.questions|safe }}
+        {{ current_step.preguntas_frecuentes|safe }}
       {% endif %}
       &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
   </div>
   <div class='w-row' style='margin-bottom: 20px;'>
     <div class="w-col w-col-6 w-col-offset-3 column-center">
-      <a target='_blank' style='text-decoration: none;' class="w-button statedep" href='{{ current_step.step_url }}'>Ir al sitio de la agencia o corporación</a>
+      <a target='_blank' style='text-decoration: none;' class="w-button statedep" href='{{ current_step.url_de_tramite }}'>Ir al sitio de la agencia o corporación</a>
       &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
     </div>
   </div>

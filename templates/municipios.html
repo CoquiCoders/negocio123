@@ -3,8 +3,8 @@
 {% block content %}
       <div class="w-row">
         <div class="w-col w-col-7">
-          <h1>{{ current_step.full_title }} &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</h1>
-          <p class="header-p">{{ current_step.description }}</p>
+          <h1>{{ current_step.nombre_de_agencia }} &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</h1>
+          <p class="header-p">{{ current_step.descripcion }}</p>
         </div>
         <div class="w-col w-col-5">
           <img class="progress-wheel" width="100" src="{{ url_for('static', filename='images') }}/progress{{ current_step.id }}.png" alt="Step number {{ current_step.id }}">
