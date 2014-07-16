@@ -132,7 +132,7 @@ class LoginAdminIndexView(AdminIndexView):
     return super(LoginAdminIndexView, self).index()
 
 class StepView(ModelView):
-  form_overrides = dict(tipo_de_tramite=TextAreaField, requisitos=TextAreaField, atencion=TextAreaField, preguntas_frecuentes=TextAreaField,)
+  form_overrides = dict(tipo_de_tramite=TextAreaField, requisitos=TextAreaField, consideraciones=TextAreaField, preguntas_frecuentes=TextAreaField,)
   edit_template = 'admin/edit.html'
   list_template = 'admin/list.html'
   create_template = 'admin/create.html'
