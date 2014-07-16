@@ -63,11 +63,15 @@
         <h2>Consideraciones</h2>
         {{ current_step.attention|safe }}
       {% endif %}
+      {% if current_step.questions %}
+        <h2>Preguntas Frecuentes</h2>
+        {{ current_step.questions|safe }}
+      {% endif %}
       &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
   </div>
   <div class='w-row' style='margin-bottom: 20px;'>
     <div class="w-col w-col-6 w-col-offset-3 column-center">
-      <a target='_blank' style='text-decoration: none;' class="w-button statedep" href='{{ current_step.step_url }}'>Ir al sitio web de la agencia</a>
+      <a target='_blank' style='text-decoration: none;' class="w-button statedep" href='{{ current_step.step_url }}'>Ir al sitio de la agencia o corporación</a>
       &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
     </div>
   </div>

@@ -17,6 +17,8 @@ from flask.ext.login import LoginManager, login_user, UserMixin, login_required,
 import bcrypt
 
 from flask.ext.sqlalchemy import SQLAlchemy
+from flask.ext.script import Manager
+from flask.ext.migrate import Migrate, MigrateCommand
 from wtforms.fields import TextAreaField
 
 #################
@@ -36,6 +38,10 @@ app.secret_key = 'A0Zr98j/3yX R~XHH!jmN]LWXD2D256y2'
 
 app.config['SQLALCHEMY_DATABASE_URI'] = os.getenv('DATABASE_URL', 'sqlite:///dump.sqlite3')
 db = SQLAlchemy(app)
+migrate = Migrate(app, db)
+
+manager = Manager(app)
+manager.add_command('db', MigrateCommand)
 
 #############
 #
@@ -69,6 +75,7 @@ class Step(db.Model):
   type_of_process = db.Column(db.String)
   papers_to_fill = db.Column(db.String)
   attention = db.Column(db.String)
+  questions = db.Column(db.String)
   step_url = db.Column(db.String(80))
 
   def __repr__(self):
@@ -125,7 +132,7 @@ class LoginAdminIndexView(AdminIndexView):
     return super(LoginAdminIndexView, self).index()
 
 class StepView(ModelView):
-  form_overrides = dict(type_of_process=TextAreaField, papers_to_fill=TextAreaField, attention=TextAreaField,)
+  form_overrides = dict(type_of_process=TextAreaField, papers_to_fill=TextAreaField, attention=TextAreaField, questions=TextAreaField,)
   edit_template = 'admin/edit.html'
   list_template = 'admin/list.html'
   create_template = 'admin/create.html'
@@ -227,4 +234,4 @@ def page_not_found(error):
   return render_template('page_not_found.html'), 404
 
 if __name__ == '__main__':
-  app.run()
+  manager.run()
