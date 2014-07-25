@@ -451,6 +451,12 @@ td, th {
   text-align: left;
 }
 
+tr {
+  border-bottom: 1px solid gray;
+  border-top: 1px solid gray;
+  border-collapse: collapse;
+}
+
 col:nth-child(even) {
   background: #D4FFE7
 }
