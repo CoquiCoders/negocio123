@@ -20,17 +20,17 @@
         <tr>
           <td>
             {% if step.nombre_de_agencia %}
-              <strong> {{ step.nombre_de_agencia|safe }} </strong>
+              <strong> {{ step.nombre_de_agencia|truncate()|safe }} </strong>
             {% endif %}
           </td>
           <td>
             {% if step.descripcion %}
-              {{ step.descripcion|safe }}
+              {{ step.descripcion|truncate()|safe }}
             {% endif %}
           </td>
           <td>
             {% if step.requisitos %}
-              {{ step.requisitos|safe }}
+              {{ step.requisitos|truncate()|safe }}
             {% endif %}
           </td>
           <td>
@@ -44,22 +44,22 @@
           </td>
           <td>
             {% if step.duracion %}
-              {{ step.duracion|safe }}
+              {{ step.duracion|truncate()|safe }}
             {% endif %}
           </td>
           <td>
             {% if step.costo_de_tramite %}
-              {{ step.costo_de_tramite|safe }}
+              {{ step.costo_de_tramite|truncate()|safe }}
             {% endif %}
           </td>
           <td>
             {% if step.tipo_de_tramite %}
-              {{ step.tipo_de_tramite|safe }}
+              {{ step.tipo_de_tramite|truncate()|safe }}
             {% endif %}
           </td>
           <td>
             {% if step.consideraciones %}
-              {{ step.consideraciones|safe }}
+              {{ step.consideraciones|truncate()|safe }}
             {% endif %}
           </td>
         </tr>
