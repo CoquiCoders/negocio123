@@ -7,6 +7,7 @@ should help with maintaining the information up to date, as anyone could potenti
 import os
 
 from urllib import urlencode
+from nltk import clean_html
 
 from flask import Flask, render_template, redirect, url_for, abort, request, flash
 
@@ -164,6 +165,15 @@ admin.add_view(ModelView(Municipio, db.session))
 @app.route('/')
 def index():
   steps = Step.query.all()
+  for step in steps:
+    if step.tipo_de_tramite:
+      step.tipo_de_tramite = clean_html(step.tipo_de_tramite)
+    if step.requisitos:
+      step.requisitos = clean_html(step.requisitos)
+    if step.consideraciones:
+      step.consideraciones = clean_html(step.consideraciones)
+    if step.preguntas_frecuentes:
+      step.preguntas_frecuentes = clean_html(step.preguntas_frecuentes)
   return render_template('index.html', steps=steps)
 
 @app.route('/<step_number>/')
