@@ -166,7 +166,7 @@ admin.add_view(ModelView(Municipio, db.session))
 
 @app.route('/')
 def index():
-  steps = Step.query.all()
+  steps = Step.query.order_by(Step.num_de_paso)
   for step in steps:
     if step.tipo_de_tramite:
       step.tipo_de_tramite = clean_html(step.tipo_de_tramite)
