@@ -7,7 +7,7 @@
       <p class="header-p">{{ current_step.descripcion }}</p>
     </div>
     <div class="w-col w-col-5">
-      <img class="progress-wheel" width="100" src="{{ url_for('static', filename='images') }}/progress{{ current_step.id }}.png" alt="Step number {{ current_step.id }}">
+      <img class="progress-wheel" width="100" src="{{ url_for('static', filename='images') }}/progress{{ current_step.num_de_paso }}.png" alt="Step number {{ current_step.num_de_paso }}">
     </div>
   </div>
   <div class="section">
@@ -77,16 +77,16 @@
   </div>
   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
   <div class="w-row">
-    {% if current_step.id == 1 %}
+    {% if current_step.num_de_paso == 1 %}
       <div class="w-col w-col-6 w-col-small-6 w-col-tiny-6 column-center"><a class="button btn-small" href="/">Home</a></div>
     {% else %}
-      <div class="w-col w-col-6 w-col-small-6 w-col-tiny-6 column-center"><a class="button btn-small" href="/{{ current_step.id - 1 }}">Anterior</a></div>
+      <div class="w-col w-col-6 w-col-small-6 w-col-tiny-6 column-center"><a class="button btn-small" href="/{{ current_step.num_de_paso - 1 }}">Anterior</a></div>
     {% endif %}
-    {% if current_step.id == steps|length %}
+    {% if current_step.num_de_paso == steps|length %}
     <div class="w-col w-col-6 w-col-small-6 w-col-tiny-6 column-center"><a class="button btn-small" href="/">Home</a>
     </div>
     {% else %}
-      <div class="w-col w-col-6 w-col-small-6 w-col-tiny-6 column-center"><a class="button btn-small" href="/{{ current_step.id + 1 }}">Siguiente</a>
+      <div class="w-col w-col-6 w-col-small-6 w-col-tiny-6 column-center"><a class="button btn-small" href="/{{ current_step.num_de_paso + 1 }}">Siguiente</a>
       </div>
     {% endif %}
   </div>

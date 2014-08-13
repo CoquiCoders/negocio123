@@ -78,6 +78,7 @@ class Step(db.Model):
   consideraciones = db.Column(db.String)
   preguntas_frecuentes = db.Column(db.String)
   url_de_agencia = db.Column(db.String(80))
+  num_de_paso = db.Column(db.Integer)
 
   def __repr__(self):
     return '<Step: %r>' % self.title
@@ -137,6 +138,7 @@ class StepView(ModelView):
   edit_template = 'admin/edit.html'
   list_template = 'admin/list.html'
   create_template = 'admin/create.html'
+  column_default_sort = ('num_de_paso', False)
 
   def is_accessible(self):
     return current_user.is_authenticated()
